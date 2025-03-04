@@ -48,25 +48,25 @@ class Circle {
   }
 
   update(context) {
-    if (!this.moving) return; // Detener el movimiento si el contador llegó a 10
-
     this.draw(context);
 
-    if (this.posX + this.radius > window_width || this.posX - this.radius < 0) {
-      this.dx = -this.dx;
-      collisionCounter++;
-    }
-    if (this.posY + this.radius > window_height || this.posY - this.radius < 0) {
-      this.dy = -this.dy;
-      collisionCounter++;
-    }
+    if (this.moving) {
+      if (this.posX + this.radius > window_width || this.posX - this.radius < 0) {
+        this.dx = -this.dx;
+        collisionCounter++;
+      }
+      if (this.posY + this.radius > window_height || this.posY - this.radius < 0) {
+        this.dy = -this.dy;
+        collisionCounter++;
+      }
 
-    if (collisionCounter >= 10) {
-      this.moving = false;
-    }
+      if (collisionCounter >= 10) {
+        this.moving = false; // Detener el círculo cuando llegue a 10 colisiones
+      }
 
-    this.posX += this.dx;
-    this.posY += this.dy;
+      this.posX += this.dx;
+      this.posY += this.dy;
+    }
   }
 }
 
